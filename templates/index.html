@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Finance Corp - Rapports Financiers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="luxury-header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <span class="brand-text">LUXURY</span>
+                        <span class="brand-highlight">FINANCE</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Rapports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Rapports Financiers Professionnels</h1>
+                    <p class="hero-subtitle">Générez des rapports financiers de qualité bancaire avec notre solution automatisée</p>
+                    
+                    <!-- Enterprise Selection -->
+                    <div class="mb-4">
+                        <label for="enterpriseSelect" class="form-label text-white">Sélectionnez une entreprise :</label>
+                        <select class="form-select form-select-lg" id="enterpriseSelect">
+                            <option value="luxury_finance" selected>Luxury Finance Corp</option>
+                            <option value="tech_innovations">Tech Innovations SARL</option>
+                            <option value="global_services">Global Services Ltd</option>
+                        </select>
+                    </div>
+                    
+                    <button id="generateBtn" class="btn btn-gold btn-lg">Générer le rapport PDF</button>
+                    <div id="loadingSpinner" class="spinner-border text-gold mt-3" role="status" style="display: none;">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="financial-card">
+                        <h3>Résumé Financier</h3>
+                        <div class="card-content">
+                            <div class="metric">
+                                <span class="metric-label">Entreprise</span>
+                                <span class="metric-value" id="companyName">{{ data.company_name }}</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Chiffre d'affaires</span>
+                                <span class="metric-value" id="revenue">{{ "{:,}".format(data.financial_indicators.revenue) }} €</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Résultat Net</span>
+                                <span class="metric-value" id="netResult">{{ "{:,}".format(data.financial_indicators.net_result) }} €</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Croissance</span>
+                                <span class="metric-value" id="growthRate">{{ data.financial_indicators.growth_rate }}%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Marge Nette</span>
+                                <span class="metric-value" id="netMargin">{{ "{:.1f}".format((data.financial_indicators.net_result / data.financial_indicators.revenue) * 100) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <h2 class="section-title">Notre Solution de Reporting</h2>
+                <p class="section-subtitle">Une approche professionnelle pour vos rapports financiers</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-bar-graph" viewBox="0 0 16 16">
+                                <path d="M10 13.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v6zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-1z"/>
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                            </svg>
+                        </div>
+                        <h3>Reporting Automatisé</h3>
+                        <p>Génération instantanée de rapports complets avec données financières actualisées</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shield-fill-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.304.144.531.208.8.208s.496-.064.8-.208c.304-.143.662-.352 1.048-.625a11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z"/>
+                            </svg>
+                        </div>
+                        <h3>Sécurité Bancaire</h3>
+                        <p>Confidentialité maximale et protection des données financières sensibles</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-file-pdf-fill" viewBox="0 0 16 16">
+                                <path d="M5.523 10.583c-.768 0-1.295.527-1.295 1.327 0 .795.532 1.323 1.295 1.323.77 0 1.295-.532 1.295-1.328 0-.795-.532-1.322-1.295-1.322z"/>
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM8.5 7.5v-1h1v1h-1zm2 0v-1h1v1h-1zm-2 2v-1h1v1h-1zm2 0v-1h1v1h-1zm-2 2v-1h1v1h-1zm2 0v-1h1v1h-1zm-4-8h3v2h-3V5zm0 3h3v2h-3V8zm0 3h3v2h-3v-2z"/>
+                            </svg>
+                        </div>
+                        <h3>Design Premium</h3>
+                        <p>Rapports au format PDF avec mise en page professionnelle et élégante</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="luxury-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>LUXURY FINANCE CORP</h4>
+                    <p>Solutions de reporting financier professionnel</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 Tous droits réservés</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Rapport Généré</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="checkmark-circle">
+                            <div class="background"></div>
+                            <div class="checkmark draw"></div>
+                        </div>
+                        <h4>Votre rapport est prêt !</h4>
+                        <p>Le téléchargement va commencer automatiquement.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle enterprise selection
+        document.getElementById('enterpriseSelect').addEventListener('change', function() {
+            const enterpriseId = this.value;
+            
+            fetch(`/select-enterprise/${enterpriseId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Update financial card with new data
+                document.getElementById('companyName').textContent = data.company_name;
+                document.getElementById('revenue').textContent = `${Number(data.financial_indicators.revenue).toLocaleString('fr-FR')} €`;
+                document.getElementById('netResult').textContent = `${Number(data.financial_indicators.net_result).toLocaleString('fr-FR')} €`;
+                document.getElementById('growthRate').textContent = `${data.financial_indicators.growth_rate}%`;
+                const netMargin = (data.financial_indicators.net_result / data.financial_indicators.revenue * 100).toFixed(1);
+                document.getElementById('netMargin').textContent = `${netMargin}%`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue lors du changement d\'entreprise.');
+            });
+        });
+        
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const button = this;
+            const spinner = document.getElementById('loadingSpinner');
+            const enterpriseId = document.getElementById('enterpriseSelect').value;
+            
+            // Show loading state
+            button.disabled = true;
+            button.textContent = 'Génération en cours...';
+            spinner.style.display = 'inline-block';
+            
+            // Get current enterprise data
+            fetch(`/select-enterprise/${enterpriseId}`)
+            .then(response => response.json())
+            .then(enterpriseData => {
+                // Send request to generate report with selected enterprise data
+                return fetch('/generate-report', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(enterpriseData)
+                });
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                }
+                throw new Error('Erreur lors de la génération du rapport');
+            })
+            .then(blob => {
+                // Get company name for filename
+                const companyName = document.getElementById('companyName').textContent;
+                const fileName = `rapport_financier_${companyName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0, 10)}.pdf`;
+                
+                // Create download link
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+                
+                // Show success modal
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+                
+                // Reset button
+                button.disabled = false;
+                button.textContent = 'Générer le rapport PDF';
+                spinner.style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue lors de la génération du rapport.');
+                
+                // Reset button
+                button.disabled = false;
+                button.textContent = 'Générer le rapport PDF';
+                spinner.style.display = 'none';
+            });
+        });
+    </script></body>
+</html>
